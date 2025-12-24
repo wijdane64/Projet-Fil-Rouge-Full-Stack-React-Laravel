@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('phone');
             $table->string('address');
-            $table->string('gender');
+            $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth'); 
+            $table->string('specialization');
             $table->softdeletes();  
             $table->timestamps();
         });

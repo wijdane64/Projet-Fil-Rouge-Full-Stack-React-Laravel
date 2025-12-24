@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
+   public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

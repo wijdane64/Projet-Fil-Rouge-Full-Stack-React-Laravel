@@ -18,8 +18,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
-            $table->string('gender');
+            $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth'); 
+            $table->bigInteger('level_id')->unsigned(); 
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->string('parent_name');
+            $table->string('parent_phone');
+            $table->string('parent_email');
             $table->softdeletes();
             $table->timestamps();
         });

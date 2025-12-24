@@ -16,5 +16,18 @@ class Student extends Model
         'address',
         'gender',
         'date_of_birth',
+        'level_id',
+        'parent_name',
+        'parent_phone',
+        'parent_email',
+        
     ];
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
 }

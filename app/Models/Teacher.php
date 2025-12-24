@@ -16,7 +16,14 @@ class Teacher extends Model
         'address',
         'gender',
         'date_of_birth',
+        'specialization',
 
     ];
-
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
+    
+    
 }
+
