@@ -24,7 +24,7 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:20',
-            'level_id' => 'required|exists:levels,id',
+            'level_id' => 'nullable|exists:levels,id',
         ];
     }
 }

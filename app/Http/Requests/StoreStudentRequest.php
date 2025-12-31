@@ -22,15 +22,15 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
+            'firstname' => 'required|string|max:30',
+            'lastname' => 'required|string|max:30',
             'email' => 'required|email|unique:students,email|max:50',
             'phone' => 'nullable|string|max:20',
             'date_of_birth' => 'nullable|date',
             'address' => 'nullable|string|max:40',
             'level_id' => 'required|exists:levels,id',
             'parent_name' => 'nullable|string|max:20',
-            'parent_contact' => 'nullable|string|max:20',
+            'parent_phone' => 'nullable|string|max:20',
             'parent_email' => 'nullable|email|max:20',
 
         ];

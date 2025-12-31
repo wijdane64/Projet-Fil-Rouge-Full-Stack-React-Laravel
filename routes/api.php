@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Http\Controllers\RegistrationController;
 
 
 
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('students', StudentController::class);
     Route::apiResource('teachers', TeacherController::class);
     Route::apiResource('subjects', SubjectController::class);
+    Route::apiResource('registrations', RegistrationController::class);
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/users', [UserController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);

@@ -4,7 +4,17 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Teacher;
+use App\Models\Subject;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 class StoreTeacherRequest extends FormRequest
+
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +32,14 @@ class StoreTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
+            'firstname' => 'required|string|max:50',
+            'lastname' => 'required|string|max:50',
             'email' => 'required|email|unique:teachers,email|max:50',
             'phone' => 'nullable|string|max:20',
-            'birthdate' => 'nullable|date',
+            'date_of_birth' => 'nullable|date',
             'address' => 'nullable|string|max:100',
-            'subject_id' => 'required|exists:subjects,id',
+            'gender' => 'nullable|string|max:10',
+            'subject_id' => 'nullable|exists:subjects,id',
             'specialization' => 'nullable|string|max:100',
             
         ];

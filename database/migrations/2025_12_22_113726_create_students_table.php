@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('parent_name');
             $table->string('parent_phone');
             $table->string('parent_email');
-            $table->softdeletes();
             $table->timestamps();
         });
     }

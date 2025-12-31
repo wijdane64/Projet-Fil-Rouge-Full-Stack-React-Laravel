@@ -22,10 +22,10 @@ class StoreRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'student_id' => 'required|exists:users,id',
             'course_id' => 'required|exists:courses,id',
-            'status' => ['required', Rule::in(['pending', 'approved', 'rejected'])],
-            'registered_at' => 'required|date',
+            'status' => ['required', Rule::in(['pinding', 'confirmed', 'cancelled'])],
+            'registered_date' => 'default|date',
             
         ];
     }

@@ -13,6 +13,10 @@ use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Subject;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+
 
 
 class TeacherController extends Controller
@@ -29,7 +33,7 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTeacherRequest $request)
     {
         $teacher = Teacher::create($request->validated());
         return response()->json([
@@ -49,7 +53,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
         $teacher->update($request->validated());
         return response()->json([

@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class RegistrationController extends Controller
 {
     /**
@@ -22,7 +27,7 @@ class RegistrationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRegistrationRequest $request)
     {
         $registration = Registration::create($request->validated());
         return response()->json([
@@ -42,7 +47,7 @@ class RegistrationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Registration $registration)
+    public function update(UpdateRegistrationRequest $request, Registration $registration)
     {
         $registration->update($request->validated());
         return response()->json([

@@ -4,6 +4,16 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use App\Models\Teacher;
+use App\Models\Subject; 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 class UpdateTeacherRequest extends FormRequest
 {
     /**
@@ -22,13 +32,13 @@ class UpdateTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'sometimes|required|string|max:50',
-            'last_name' => 'sometimes|required|string|max:50',
+            'firstname' => 'sometimes|required|string|max:50',
+            'lastname' => 'sometimes|required|string|max:50',
             'email' => 'sometimes|required|email|unique:teachers,email,' . $this->route('teacher')->id . '|max:50',
             'phone' => 'sometimes|nullable|string|max:20',
-            'birthdate' => 'sometimes|nullable|date',
+            'date_of_birth' => 'sometimes|nullable|date',
             'address' => 'sometimes|nullable|string|max:100',
-            'subject_id' => 'sometimes|required|exists:subjects,id',
+            'subject_id' => 'sometimes|nullable|exists:subjects,id',
             'specialization' => 'sometimes|nullable|string|max:100',
             
         ];

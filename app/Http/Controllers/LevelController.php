@@ -24,7 +24,7 @@ class LevelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLevelRequest $request)
     {
         $level = Level::create($request->validated());
         return response()->json([
@@ -44,7 +44,7 @@ class LevelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Level $level)
+    public function update(UpdateLevelRequest $request, Level $level)
     {
         $level->update($request->validated());
         return response()->json([

@@ -25,7 +25,7 @@ class StoreLevelRequest extends FormRequest
         return [
             'name' => 'required|string|max:20',
             'description' => 'nullable|string',
-            'order' => 'required|integer|min:1',
+            
             
         ];
     }

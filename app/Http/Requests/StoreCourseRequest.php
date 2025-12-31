@@ -22,11 +22,13 @@ class StoreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:50',
-            'description' => 'nullable|string',
+            
             'subject_id' => 'required|exists:subjects,id',
             'level_id' => 'required|exists:levels,id',
             'teacher_id' => 'required|exists:teachers,id',
+            'day' => 'required|string|max:20',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
 
         ];
     }
