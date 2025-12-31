@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Level;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreLevelRequest;
+use App\Http\Requests\UpdateLevelRequest;
+use Illuminate\Validation\Rule;
+
 
 class LevelController extends Controller
 {
@@ -12,7 +17,8 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $levels = Level::all();
+        return response()->json($levels);
     }
 
     /**
@@ -20,7 +26,11 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $level = Level::create($request->validated());
+        return response()->json([
+            'message' => 'Niveau créé avec succès',
+            'level' => $level
+        ], 201);
     }
 
     /**
@@ -36,7 +46,11 @@ class LevelController extends Controller
      */
     public function update(Request $request, Level $level)
     {
-        //
+        $level->update($request->validated());
+        return response()->json([
+            'message' => 'Niveau mis à jour avec succès',
+            'level' => $level
+        ], 200);
     }
 
     /**
@@ -44,6 +58,9 @@ class LevelController extends Controller
      */
     public function destroy(Level $level)
     {
-        //
+        $level->delete();
+        return response()->json([
+            'message' => 'Niveau supprimé avec succès'
+        ], 200);
     }
 }

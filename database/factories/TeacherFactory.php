@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,16 +14,18 @@ class TeacherFactory extends Factory
      *
      * @return array<string, mixed>
      */
+       protected $model = Teacher::class;
     public function definition(): array
     {
         return [
-            'firstname' => fake->firstName(),
+            'firstname' => $this->faker->firstName(),
             'lastname' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->unique()->phoneNumber(),
             'address' => $this->faker->address(),
             'gender' => $this->faker->randomElement(['male', 'female']),
-            'date_of_birth' => $this->faker->date(),
+            'date_of_birth' => $this->faker->date('Y-m-d', '-18 years'),
+            'specialization' => $this->faker->word(),
         ];
     }
 }

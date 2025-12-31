@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -12,7 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return response()->json($students);
     }
 
     /**
@@ -20,7 +25,11 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = Student::create($request->validated());
+        return response()->json([
+            'message' => 'Étudiant créé avec succès',
+            'student' => $student
+        ], 201);
     }
 
     /**
@@ -36,7 +45,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->update($request->validated());
+        return response()->json([
+            'message' => 'Étudiant mis à jour avec succès',
+            'student' => $student
+        ], 200);
     }
 
     /**
@@ -44,6 +57,9 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return response()->json([
+            'message' => 'Étudiant supprimé avec succès'
+        ], 200);
     }
 }

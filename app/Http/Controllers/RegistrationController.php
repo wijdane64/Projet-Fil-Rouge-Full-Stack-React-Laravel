@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Registration;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRegistrationRequest;
+use App\Http\Requests\UpdateRegistrationRequest;
+use Illuminate\Validation\Rule;
 class RegistrationController extends Controller
 {
     /**
@@ -12,7 +15,8 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        //
+        $registrations = Registration::all();
+        return response()->json($registrations);
     }
 
     /**
@@ -20,7 +24,11 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $registration = Registration::create($request->validated());
+        return response()->json([
+            'message' => 'Inscription créée avec succès',
+            'registration' => $registration
+        ], 201);
     }
 
     /**
@@ -36,7 +44,11 @@ class RegistrationController extends Controller
      */
     public function update(Request $request, Registration $registration)
     {
-        //
+        $registration->update($request->validated());
+        return response()->json([
+            'message' => 'Inscription mise à jour avec succès',
+            'registration' => $registration
+        ], 200);
     }
 
     /**
@@ -44,6 +56,9 @@ class RegistrationController extends Controller
      */
     public function destroy(Registration $registration)
     {
-        //
+        $registration->delete();
+        return response()->json([
+            'message' => 'Inscription supprimée avec succès'
+        ], 200);
     }
 }

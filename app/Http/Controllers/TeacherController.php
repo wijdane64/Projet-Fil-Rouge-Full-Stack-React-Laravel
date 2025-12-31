@@ -4,6 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class TeacherController extends Controller
 {
@@ -12,7 +22,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all();
+        return response()->json($teachers);
     }
 
     /**
@@ -20,7 +31,11 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teacher = Teacher::create($request->validated());
+        return response()->json([
+            'message' => 'Enseignant créé avec succès',
+            'teacher' => $teacher
+        ], 201);
     }
 
     /**
@@ -36,7 +51,11 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $teacher->update($request->validated());
+        return response()->json([
+            'message' => 'Enseignant mis à jour avec succès',
+            'teacher' => $teacher
+        ], 200);
     }
 
     /**
@@ -44,6 +63,9 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+        return response()->json([
+            'message' => 'Enseignant supprimé avec succès'
+        ], 200);
     }
 }

@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\ContactMessage;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ContactMessage>
  */
@@ -14,13 +14,14 @@ class ContactMessageFactory extends Factory
      *
      * @return array<string, mixed>
      */
+     protected $model = ContactMessage::class;
     public function definition(): array
     {
-        return [
-            'name'=>fake()->name(),
-            'email'=>fake()->unique(),
-            'phone'=>fake()->phoneNumber(),
-            'message'=>fake()->text(),
+         return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+            'phone' => $this->faker->optional()->phoneNumber(),
+            'message' => $this->faker->paragraph(),
         ];
     }
 }

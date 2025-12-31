@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreContactMessageRequest;
+use App\Http\Requests\UpdateContactMessageRequest;
+use Illuminate\Validation\Rule;
 
 class ContactMessageController extends Controller
 {
@@ -12,7 +16,8 @@ class ContactMessageController extends Controller
      */
     public function index()
     {
-        //
+      $contactMessages = ContactMessage::all();
+      return response()->json($contactMessages);  
     }
 
     /**
@@ -20,7 +25,12 @@ class ContactMessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contact=ContactMessage::create($request->validated());
+        return response()->json([
+            
+            'message' => 'Message envoyé avec succès',
+            'contact' => $contact
+        ], 201);
     }
 
     /**
@@ -28,7 +38,7 @@ class ContactMessageController extends Controller
      */
     public function show(ContactMessage $contactMessage)
     {
-        //
+ 
     }
 
     /**
@@ -36,7 +46,11 @@ class ContactMessageController extends Controller
      */
     public function update(Request $request, ContactMessage $contactMessage)
     {
-        //
+        $contactMessage->update($request->validated());
+        return response()->json([
+            'message' => 'Message mis à jour avec succès',
+            'contactMessage' => $contactMessage
+        ], 200);
     }
 
     /**
@@ -44,6 +58,9 @@ class ContactMessageController extends Controller
      */
     public function destroy(ContactMessage $contactMessage)
     {
-        //
+        $contactMessage->delete();
+        return response()->json([
+            'message' => 'Message supprimé avec succès'
+        ], 200);
     }
 }

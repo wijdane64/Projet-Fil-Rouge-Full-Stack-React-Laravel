@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('registration_date');
             $table->enum('status', ['pending', 'confirmed', 'cancelled']);
             $table->timestamps();
+
         });
     }
 

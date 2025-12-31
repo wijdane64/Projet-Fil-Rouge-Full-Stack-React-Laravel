@@ -2,24 +2,40 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use App\Models\User;
+use App\Models\Level;
+use App\Models\Teacher;
+use App\Models\Subject;
+use App\Models\Student;
+use App\Models\Course;
+use App\Models\Registration;
+use App\Models\ContactMessage;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-         \App\Models\User::factory(10)->create();
-            \App\Models\Teacher::factory(15)->create();
-            \App\Models\Student::factory(50)->create();
-            \App\Models\Level::factory(5)->create();
+        User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+       Level::factory(6)->create();
+
+        
+        $teachers = Teacher::factory(5)->create();
+
+        
+        $subjects = Subject::factory(10)->create();
+
+        
+        $students = Student::factory(20)->create();
+
+
+        $courses = Course::factory(10)->create();
+
+        Registration::factory(30)->create();
+
+        
+        ContactMessage::factory(10)->create();
     }
 }

@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCourseRequest;
+use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Validation\Rule;
+
+
 
 class CourseController extends Controller
 {
@@ -12,7 +18,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return response()->json($courses);
     }
 
     /**
@@ -20,7 +27,11 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course=Course::create($request->validated());
+        return response()->json([
+            'message' => 'Cours créé avec succès',
+            'course' => $course
+        ], 201);
     }
 
     /**
@@ -28,7 +39,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        
     }
 
     /**
@@ -36,7 +47,11 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course->update($request->validated());
+        return response()->json([
+            'message' => 'Cours mis à jour avec succès',
+            'course' => $course
+        ], 200);
     }
 
     /**
@@ -44,6 +59,9 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return response()->json([
+            'message' => 'Cours supprimé avec succès'
+        ], 200);
     }
 }

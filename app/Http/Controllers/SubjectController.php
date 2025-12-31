@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+Use App\Http\Controllers\Controller;
+Use App\Http\Requests\StoreSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Validation\Rule;
+
+
+
 
 class SubjectController extends Controller
 {
@@ -12,7 +19,10 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+        return response()->json($subjects);
+        
+
     }
 
     /**
@@ -20,7 +30,11 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subject=Subject::create($request->validated());
+        return response()->json([
+            'message' => 'Matière créée avec succès',
+            'subject' => $subject
+        ], 201);
     }
 
     /**
@@ -28,7 +42,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        //
+        
     }
 
     /**
@@ -36,7 +50,12 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+    $subject->update($request->validated());
+
+        return response()->json([
+            'message' => 'Matière mise à jour',
+            'data' => $subject
+        ]);
     }
 
     /**
@@ -44,6 +63,11 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        
+        $subject->delete();
+
+        return response()->json([
+            'message' => 'Matière supprimée'
+        ]);
     }
 }
